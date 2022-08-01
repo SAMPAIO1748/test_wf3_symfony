@@ -55,4 +55,19 @@ class MainController extends AbstractController
     {
         return new Response($id);
     }
+
+    // Exercice : créer une route qui va afficher "Mon âge est de : {valeur de l'âge} ans". 
+    // La valeur de l'âge est donnée par la wildcard
+
+    /**
+     * @Route("age/{id}", name="age")
+     */
+    public function age($id)
+    {
+        if (is_numeric($id)) {
+            return new Response("Mon âge est de : " . $id . " ans.");
+        } else {
+            return new Response("Il faut donner un âge.");
+        }
+    }
 }
