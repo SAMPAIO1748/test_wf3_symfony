@@ -70,4 +70,22 @@ class MainController extends AbstractController
             return new Response("Il faut donner un âge.");
         }
     }
+
+    // Exercice : créer une route poker qui aura une wildcard, 
+    // si l'âge est inférieur à 18 alors on répond : "Vous n'êtes pas autorisé à jouer"
+    // Si l'âge est supérieur ou égale à 18 on répond : "Vous êtes autorisé à jouer".
+
+    /**
+     * @Route("poker/{age}", name="poker")
+     */
+    public function poker($age)
+    {
+        if (!is_numeric($age) || $age < 0) {
+            return new Response("Vous devez rentrer un âge");
+        } elseif ($age >= 18) {
+            return new Response("Vous êtes autorisé à jouer");
+        } else {
+            return new Response("Vous n'êtes pas autorisé à jouer");
+        }
+    }
 }
