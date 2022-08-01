@@ -34,6 +34,25 @@ class MainController extends AbstractController
      */
     public function legal()
     {
+        // return est ce qu'attendent toutes les méthodes du Controller à la fin de leur traitement
         return new Response("Voici les mentions légales du site");
+    }
+
+    // Exercice : faire une page à propos à l'aide d'une réponse pour afficher "Nous sommes les meilleurs du monde !!"
+
+    /**
+     * @Route("about", name="about")
+     */
+    public function about()
+    {
+        return new Response("Nous sommes les meilleurs du monde !!");
+    }
+
+    /**
+     * @Route("number/{id}", name="number")
+     */
+    public function number($id)
+    {
+        return new Response($id);
     }
 }
