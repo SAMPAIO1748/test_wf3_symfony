@@ -193,4 +193,21 @@ class MainController extends AbstractController
     {
         return $this->render("super_view.html.twig");
     }
+
+    // créer une route jeu avec wildcar qui va renvoyé un vue en fonction de la wildcard que l'on donne
+    // les vues devront avoir un message dans un h1 et une image.
+
+    /**
+     * @Route("jeu/{age}", name="jeu")
+     */
+    public function jeu($age)
+    {
+        if (!is_numeric($age) || $age < 0) {
+            return $this->render("bad.html.twig");
+        } elseif ($age >= 18) {
+            return $this->render("adulte.html.twig");
+        } else {
+            return $this->render("enfant.html.twig");
+        }
+    }
 }
