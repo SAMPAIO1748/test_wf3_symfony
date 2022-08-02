@@ -3,8 +3,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> {% block css %}{% endblock %}
 		<title>Symfony WebForce3</title>
+
 
 	</head>
 	<body>
@@ -12,19 +13,19 @@
 		{% block main %}
 
 			{# Un block est "trou dans le code TWIG" 
-									        qui sera rempli dans un autre fichier TWIG  #}
+																					        qui sera rempli dans un autre fichier TWIG  #}
 
 
 		{% endblock %}
 
 		{# Modifier les fichiers twig :
-				- article_show.html.twig
-				- adulte.html.twig
-				- enfant.html.twig
-				- bad.html.twig.
-				En retirant le code qui 
-				se répète et en utilisnat les blocks
-				#}
+												- article_show.html.twig
+												- adulte.html.twig
+												- enfant.html.twig
+												- bad.html.twig.
+												En retirant le code qui 
+												se répète et en utilisnat les blocks
+												#}
 
 
 	</body>
