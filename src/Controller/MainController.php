@@ -123,4 +123,55 @@ class MainController extends AbstractController
             return new Response("L'article n'existe pas !");
         }
     }
+
+    /**
+     * @Route("bienvenue", name="bienvenue")
+     */
+    public function bienvenue()
+    {
+        // la méthode redirectToRoute est une méthode qui vient de l'AbstractController qui redirige vers une route déjà créer dans le controller.
+        return $this->redirectToRoute("home");
+    }
+
+    // Exercice : Créer une route play qui en fonction de l'âge donné par la wildcard va rediriger vers la route enfant ou la route adulte
+    // ou la route bad (la route qui va demander de donner un âge)
+    // (routes qu'il faudra créer)
+
+    /**
+     * @Route("enfant", name="enfant")
+     */
+    public function enfant()
+    {
+        return new Response("Vous êtes trop jeune pour jouer.");
+    }
+
+    /**
+     * @Route("adulte", name="adulte")
+     */
+    public function adulte()
+    {
+        return new Response("Vous avez l'âge requis, vous pouvez jouer.");
+    }
+
+    /**
+     * @Route("bad", name="bad")
+     */
+    public function bad()
+    {
+        return new Response("Vous avez donné une mauvaise réponse. Vous devez donner un âge.");
+    }
+
+    /**
+     * @Route("play/{age}", name="play")
+     */
+    public function play($age)
+    {
+        if (!is_numeric($age) || $age < 0) {
+            return $this->redirectToRoute("bad");
+        } elseif ($age >= 18) {
+            return $this->redirectToRoute("adulte");
+        } else {
+            return $this->redirectToRoute("enfant");
+        }
+    }
 }
