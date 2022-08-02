@@ -174,4 +174,12 @@ class MainController extends AbstractController
             return $this->redirectToRoute("enfant");
         }
     }
+
+    /**
+     * @Route("view", name="view")
+     */
+    public function view()
+    {
+        return $this->render("vue.html.twig");
+    }
 }
