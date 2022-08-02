@@ -210,4 +210,37 @@ class MainController extends AbstractController
             return $this->render("enfant.html.twig");
         }
     }
+
+    /**
+     * @Route("variables", name="variables")
+     */
+    public function variables()
+    {
+        $variable = "Ma variable PHP";
+        $variable2 = "Mon autre variable PHP";
+        $variable3 = 17;
+
+        return $this->render("variables.html.twig", [
+            // nom de la variable     valeur de la variable
+            // dans le fichier twig  
+            "variable" => $variable,
+            "variable2" => $variable2,
+            "variable3" => $variable3
+        ]);
+    }
+
+    /**
+     * @Route("variables/table", name="variables_table")
+     */
+    public function variablesTable()
+    {
+        $tableau = [
+            "article 1",
+            "article 2",
+            "article 3",
+            "article 4"
+        ];
+
+        return $this->render("tableau.html.twig", ['tableau' => $tableau]);
+    }
 }
