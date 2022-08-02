@@ -182,4 +182,15 @@ class MainController extends AbstractController
     {
         return $this->render("vue.html.twig");
     }
+
+    // Exercice : céer une route qui va afficher une vue qui
+    // contiendra un h1, un h2, un p, un table, une image.
+
+    /**
+     * @Route("super/view", name="super_view")
+     */
+    public function superView()
+    {
+        return $this->render("super_view.html.twig");
+    }
 }
