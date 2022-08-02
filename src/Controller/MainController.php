@@ -88,4 +88,39 @@ class MainController extends AbstractController
             return new Response("Vous n'êtes pas autorisé à jouer");
         }
     }
+
+    /**
+     */
+
+    // Exercice : créer une route qui va afficher le titre de l'article qui sera sélectionné par la wildcard
+
+    /**
+     * @Route("array/article/{id}", name="array_article")
+     */
+    public function arrayArticle($id)
+    {
+        $tableau_articles = [
+            1 => [
+                "titre" => "Vive la Bretagne",
+                'contenu' => "La Bretagne, c'est fantastique",
+                "id" => 1
+            ],
+            2 => [
+                "titre" => "Vive l'Occitanie",
+                "contenu" => "L'Occitanie, c'est magnifique",
+                "id" => 2
+            ],
+            3 => [
+                "titre" => "Vive la Guyane",
+                "contenu" => "La Guyane, c'est merveilleux",
+                "id" => 3
+            ]
+        ];
+
+        if (array_key_exists($id, $tableau_articles)) {
+            return new Response("Le titre de l'article est : '" . $tableau_articles[$id]["titre"] . "'.");
+        } else {
+            return new Response("L'article n'existe pas !");
+        }
+    }
 }
