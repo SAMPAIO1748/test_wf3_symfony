@@ -8,6 +8,23 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
+    private $tableau_articles = [
+        1 => [
+            "titre" => "Vive la Bretagne",
+            'contenu' => "La Bretagne, c'est fantastique",
+            "id" => 1
+        ],
+        2 => [
+            "titre" => "Vive l'Occitanie",
+            "contenu" => "L'Occitanie, c'est magnifique",
+            "id" => 2
+        ],
+        3 => [
+            "titre" => "Vive la Guyane",
+            "contenu" => "La Guyane, c'est merveilleux",
+            "id" => 3
+        ]
+    ];
 
     /**
      * @Route("/main", name="main")
@@ -246,4 +263,14 @@ class MainController extends AbstractController
 
     // exercice : récuper le tableau $tableau_articles et créer une route qui
     // afficher la liste des titres des articles.
+
+    /**
+     * @Route("articles", name="article_list")
+     */
+    public function articleList()
+    {
+        $articles = $this->tableau_articles;
+
+        return $this->render("article_list.html.twig", ['articles' => $articles]);
+    }
 }
