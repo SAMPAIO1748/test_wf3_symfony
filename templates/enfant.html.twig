@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="fr">
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Document</title>
-	</head>
-	<body>
+{% extends "block.html.twig" %}
 
-		<h1>Vous n'avez pas l'âge pour jouer. Retourne dans ta chambre jouer à pokémon</h1>
-		<img src="https://www.pokepedia.fr/images/thumb/1/17/Dracaufeu-RFVF.png/800px-Dracaufeu-RFVF.png" alt="">
-	</body>
-</html>
+
+{% block main %}
+
+	<h1>Vous n'avez pas l'âge pour jouer. Retourne dans ta chambre jouer à pokémon</h1>
+	<img src="https://www.pokepedia.fr/images/thumb/1/17/Dracaufeu-RFVF.png/800px-Dracaufeu-RFVF.png" alt="">
+
+{% endblock %}
