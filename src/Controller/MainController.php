@@ -273,4 +273,24 @@ class MainController extends AbstractController
 
         return $this->render("article_list.html.twig", ['articles' => $articles]);
     }
+
+    // exercice = créer une route article_show avec wildcard qui va afficher le titre et le contenu 
+    // d'un article séléctionné par la wildcard.
+    // Le titre est dans un h1 et le contenu dans un p
+
+    /**
+     * @Route("article/{id}", name="article_show")
+     */
+    public function articleShow($id)
+    {
+
+        if (array_key_exists($id, $this->tableau_articles)) {
+
+            $article = $this->tableau_articles[$id];
+
+            return $this->render("article_show.html.twig", ['article' => $article]);
+        } else {
+            return $this->redirectToRoute("article_list");
+        }
+    }
 }
