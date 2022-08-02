@@ -243,4 +243,7 @@ class MainController extends AbstractController
 
         return $this->render("tableau.html.twig", ['tableau' => $tableau]);
     }
+
+    // exercice : récuper le tableau $tableau_articles et créer une route qui
+    // afficher la liste des titres des articles.
 }
