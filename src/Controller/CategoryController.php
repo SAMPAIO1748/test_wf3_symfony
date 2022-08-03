@@ -29,4 +29,7 @@ class CategoryController extends AbstractController
 
         return $this->render("categories_list.html.twig", ['categories' => $categories]);
     }
+
+    // Exercice : faire une méthode qui affiche les tags (nom, description) 
+    // et une méthode qui va afficher les articles (titre, contenu)
 }
