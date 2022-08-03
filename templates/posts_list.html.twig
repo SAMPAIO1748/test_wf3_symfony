@@ -3,7 +3,10 @@
 {% block main %}
 
 	{% for article in articles %}
-		<h2>{{ article.title }}</h2>
+		<h2>
+			<a href="{{ path('post_show', {'id' : article.id} ) }}">
+				{{ article.title }}</a>
+		</h2>
 		<p>{{ article.content }}</p>
 	{% endfor %}
 

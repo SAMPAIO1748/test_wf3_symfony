@@ -38,4 +38,8 @@ class TagController extends AbstractController
 
         return $this->render("tag_show.html.twig", ['tag' => $tag]);
     }
+
+    // Exercice : dans les pages vues de tags_list, categories_list et posts_list: 
+    // mettre des liens vers le post, le tag et la category sélectionnés 
+    // lorsque l'on clique sur le name ou le title 
 }

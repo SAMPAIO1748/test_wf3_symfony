@@ -3,7 +3,11 @@
 {% block main %}
 
 	{% for tag in tags %}
-		<h2>{{ tag.name }}</h2>
+		<h2>
+			<a href="{{ path('tag_show', {'id' : tag.id} ) }}">
+				{{ tag.name }}
+			</a>
+		</h2>
 		<p>{{ tag.description }}</p>
 	{% endfor %}
 
