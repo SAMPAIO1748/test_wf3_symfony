@@ -38,4 +38,11 @@ class ArticleController extends AbstractController
 
         return $this->render("post_show.html.twig", ['article' => $article]);
     }
+
+    // Exercice :  céer les routes qui vont afficher une catégorie
+    // et un tag sélectionné grâce à leurs id.
+    // Sur la vue il faudra afficher toutes les informations
+    // càd name, description, et le title des articles pour 
+    // category et name, description, color et le title des articles
+    // pour tag
 }

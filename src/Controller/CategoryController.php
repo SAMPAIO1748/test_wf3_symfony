@@ -32,4 +32,15 @@ class CategoryController extends AbstractController
 
     // Exercice : faire une méthode qui affiche les tags (nom, description) 
     // et une méthode qui va afficher les articles (titre, contenu)
+
+    /**
+     * @Route("category/{id}", name="category_show")
+     */
+    public function showCategory($id, CategoryRepository $categoryRepository)
+    {
+        // la méthode find permet de récupérer une catégorie en fonction de son id.
+        $category = $categoryRepository->find($id);
+
+        return $this->render("category_show.html.twig", ['category' => $category]);
+    }
 }
