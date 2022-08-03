@@ -1,0 +1,28 @@
+body{
+    background-color: darkcyan;
+}
+
+.container{
+    background-color: deepskyblue;
+    border: darkblue 5px solid;
+    border-radius: 20px;
+    margin: 1%;
+    box-shadow: 10px 5px 5px black;
+}
+
+.article{
+    width: 47%;
+    display: inline-block;
+    background-color: mediumturquoise;
+    border: solid 5px navy;
+    border-radius: 20px;
+    margin: 1%;
+    text-align: center;
+    box-shadow: 10px 5px 5px black;
+}
+
+.article a{
+    font-size: 1.8em;
+    text-decoration: none;
+    color : blue;
+}
