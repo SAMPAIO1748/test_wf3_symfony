@@ -27,6 +27,11 @@ class Article
      */
     private $content;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
+     */
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,9 +60,24 @@ class Article
 
         return $this;
     }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
 }
 
 /**
  * Créer les entités Category (name[string, 255, non nullable], description[text, non nullable]), 
  * Tag(name[string, 255, non nullable], description[text, non nullable], color[string, 255, non nullable])
+ * 
+ * 
+ * Nouvel exercice : Relier la table article et tag. Un article aura un tag et un tag aura plusieurs articles.
  */
