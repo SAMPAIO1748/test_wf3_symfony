@@ -1,0 +1,17 @@
+{% extends "block.html.twig" %}
+
+{% block main %}
+
+	{{form_start(tagForm)}}
+
+	{{form_label(tagForm.name, "Nom du Tag : ", {"label_attr" : {"class" : "label"} } ) }}
+	{{form_widget(tagForm.name, {"attr" : { "class" : "input", "placeholder" : "Nom du tag" } } ) }}
+
+	{{form_label(tagForm.description, "Description du Tag : ", {"label_attr" : {"class" : "label"} } ) }}
+	{{form_widget(tagForm.description, {"attr" : { "class" : "input", "placeholder" : "Description du tag" } } ) }}
+
+	{{form_widget(tagForm.Enregistrer, {'attr' : {'class' : 'button'} } ) }}
+
+	{{form_end(tagForm)}}
+
+{% endblock %}

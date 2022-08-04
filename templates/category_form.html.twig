@@ -20,8 +20,13 @@
 	{# méthode intermédiaire #}
 
 	{# form_row(categoryForm.name)
-		        form_row(categoryForm.description)
-		        form_row(categoryForm.Enregistrer)
-		     #}
+				        form_row(categoryForm.description)
+				        form_row(categoryForm.Enregistrer)
+				     #}
 
-{{form_end(categoryForm)}}{% endblock %}
+{{form_end(categoryForm)}}
+{% endblock %}
+
+{# créer des formulaires pour article et tag et modifier les méthodes update de article et tag
+pour article supprimer les champs category et tag de ArticleType.
+ #}

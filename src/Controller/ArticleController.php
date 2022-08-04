@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -54,24 +56,32 @@ class ArticleController extends AbstractController
     public function update(
         $id,
         ArticleRepository $articleRepository,
-        EntityManagerInterface $entityManagerInterface
+        EntityManagerInterface $entityManagerInterface,
+        Request $request
     ) {
         // J'ai sélectionné l'article que je souhaite modifié
         $article = $articleRepository->find($id);
 
         // Je modifie le titre de mon article sélectionné
         // cet article est un objet PHP.
-        $article->setTitle("Nouveau titre");
+        // $article->setTitle("Nouveau titre");
 
-        // persist a pour mission de regarder l'origine de $article
-        // et en fonction de l'origine, il va appliquer soit 
-        // un update soit un create en SQL 
-        $entityManagerInterface->persist($article);
+        $articleForm = $this->createForm(ArticleType::class, $article);
+        $articleForm->handleRequest($request);
 
-        // flush va enregistrer le changement dans la bdd.
-        $entityManagerInterface->flush();
+        if ($articleForm->isSubmitted() && $articleForm->isValid()) {
+            // persist a pour mission de regarder l'origine de $article
+            // et en fonction de l'origine, il va appliquer soit 
+            // un update soit un create en SQL 
+            $entityManagerInterface->persist($article);
 
-        return $this->redirectToRoute("posts_list");
+            // flush va enregistrer le changement dans la bdd.
+            $entityManagerInterface->flush();
+
+            return $this->redirectToRoute("posts_list");
+        }
+
+        return $this->render("article_form.html.twig", ['articleForm' => $articleForm->createView()]);
     }
 
     // Exercice : créer une méthode update_tag qui va changer le nom du tag et faire de même pour category
