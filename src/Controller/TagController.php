@@ -99,4 +99,21 @@ class TagController extends AbstractController
 
         return $this->render("tag_form.html.twig", ['tagForm' => $tagForm->createView()]);
     }
+
+    /**
+     * @Route("delete/tag/{id}", name="delete_tag")
+     */
+    public function deleteTag(
+        $id,
+        EntityManagerInterface $entityManagerInterface,
+        TagRepository $tagRepository
+    ) {
+
+        $tag = $tagRepository->find($id);
+
+        $entityManagerInterface->remove($tag);
+        $entityManagerInterface->flush();
+
+        return $this->redirectToRoute("tags_list");
+    }
 }
