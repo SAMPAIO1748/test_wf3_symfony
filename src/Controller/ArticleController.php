@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -73,5 +74,22 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute("posts_list");
     }
 
-    // Exercice : créer une méthode update_tag qui va changer le nom du tag et faire de même pour category.
+    // Exercice : créer une méthode update_tag qui va changer le nom du tag et faire de même pour category
+
+    /**
+     * @Route("create/post", name="create_post")
+     */
+    public function createPost(EntityManagerInterface $entityManagerInterface)
+    {
+        // création du nouvel article
+        $article = new Article();
+
+        $article->setTitle("Nouvel Article");
+        $article->setContent("Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, eius illum accusantium suscipit ea ut, rem unde commodi esse minus ratione voluptas adipisci sed voluptates officiis magni aperiam corrupti pariatur.");
+
+        $entityManagerInterface->persist($article);
+        $entityManagerInterface->flush();
+
+        return $this->redirectToRoute("posts_list");
+    }
 }
