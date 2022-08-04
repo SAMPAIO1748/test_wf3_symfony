@@ -78,17 +78,25 @@ class TagController extends AbstractController
     /**
      * @Route("create/tag", name="create_tag")
      */
-    public function createTag(EntityManagerInterface $entityManagerInterface)
+    public function createTag(EntityManagerInterface $entityManagerInterface, Request $request)
     {
         $tag = new Tag();
 
-        $tag->setName("Nouveau Tag 2, la revange");
-        $tag->setDescription("Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa et similique itaque cum ullam id consectetur voluptatibus animi maiores repellat eius, architecto accusamus illum rem veniam reprehenderit tenetur earum quis.");
-        $tag->setColor("black");
+        $tagForm = $this->createForm(TagType::class, $tag);
 
-        $entityManagerInterface->persist($tag);
-        $entityManagerInterface->flush();
+        $tagForm->handleRequest($request);
 
-        return $this->redirectToRoute("tags_list");
+        if ($tagForm->isSubmitted() && $tagForm->isValid()) {
+            //$tag->setName("Nouveau Tag 2, la revange");
+            //$tag->setDescription("Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa et similique itaque cum ullam id consectetur voluptatibus animi maiores repellat eius, architecto accusamus illum rem veniam reprehenderit tenetur earum quis.");
+            // $tag->setColor("black");
+
+            $entityManagerInterface->persist($tag);
+            $entityManagerInterface->flush();
+
+            return $this->redirectToRoute("tags_list");
+        }
+
+        return $this->render("tag_form.html.twig", ['tagForm' => $tagForm->createView()]);
     }
 }

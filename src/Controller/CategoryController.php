@@ -82,16 +82,24 @@ class CategoryController extends AbstractController
     /**
      * @Route("create/category", name="create_category")
      */
-    public function createCategory(EntityManagerInterface $entityManagerInterface)
+    public function createCategory(EntityManagerInterface $entityManagerInterface, Request $request)
     {
         $category = new Category();
 
-        $category->setName("Nouvelle catégorie");
-        $category->setDescription("Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus voluptate sed, sit dolores delectus est maiores vel fugiat enim perspiciatis, odio voluptas ab optio facilis adipisci repellendus, ex distinctio. Amet.");
+        $categoryForm = $this->createForm(CategoryType::class, $category);
 
-        $entityManagerInterface->persist($category);
-        $entityManagerInterface->flush();
+        $categoryForm->handleRequest($request);
 
-        return $this->redirectToRoute("categories_list");
+        if ($categoryForm->isSubmitted() && $categoryForm->isValid()) {
+            // $category->setName("Nouvelle catégorie");
+            // $category->setDescription("Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus voluptate sed, sit dolores delectus est maiores vel fugiat enim perspiciatis, odio voluptas ab optio facilis adipisci repellendus, ex distinctio. Amet.");
+
+            $entityManagerInterface->persist($category);
+            $entityManagerInterface->flush();
+
+            return $this->redirectToRoute("categories_list");
+        }
+
+        return $this->render('category_form.html.twig', ['categoryForm' => $categoryForm->createView()]);
     }
 }

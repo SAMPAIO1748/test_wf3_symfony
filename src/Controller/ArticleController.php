@@ -89,19 +89,28 @@ class ArticleController extends AbstractController
     /**
      * @Route("create/post", name="create_post")
      */
-    public function createPost(EntityManagerInterface $entityManagerInterface)
+    public function createPost(EntityManagerInterface $entityManagerInterface, Request $request)
     {
         // création du nouvel article
         $article = new Article();
 
-        $article->setTitle("Nouvel Article");
-        $article->setContent("Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, eius illum accusantium suscipit ea ut, rem unde commodi esse minus ratione voluptas adipisci sed voluptates officiis magni aperiam corrupti pariatur.");
+        $articleForm = $this->createForm(ArticleType::class, $article);
 
-        $entityManagerInterface->persist($article);
-        $entityManagerInterface->flush();
+        $articleForm->handleRequest($request);
 
-        return $this->redirectToRoute("posts_list");
+        if ($articleForm->isSubmitted() && $articleForm->isValid()) {
+            //$article->setTitle("Nouvel Article");
+            //$article->setContent("Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, eius illum //accusantium suscipit ea ut, rem unde commodi esse minus ratione voluptas adipisci sed voluptates officiis magni aperiam corrupti pariatur.");
+
+            $entityManagerInterface->persist($article);
+            $entityManagerInterface->flush();
+
+            return $this->redirectToRoute("posts_list");
+        }
+
+        return $this->render("article_form.html.twig", ['articleForm' => $articleForm->createView()]);
     }
 
     // Exercice : créer des routes pour créer un nouveau tag et une nouvelle category.
+    // Exercice : refaire les méthodes create_tag et create_category pour utiliser les formualires.
 }
