@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\TagRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,5 +42,23 @@ class TagController extends AbstractController
 
     // Exercice : dans les pages vues de tags_list, categories_list et posts_list: 
     // mettre des liens vers le post, le tag et la category sélectionnés 
-    // lorsque l'on clique sur le name ou le title 
+    // lorsque l'on clique sur le name ou le title
+
+    /**
+     * @Route("update/tag/{id}", name="udate_tag")
+     */
+    public function updateTag(
+        $id,
+        TagRepository $tagRepository,
+        EntityManagerInterface $entityManagerInterface
+    ) {
+        $tag = $tagRepository->find($id);
+
+        $tag->setName("Nouveau Nom du Tag");
+
+        $entityManagerInterface->persist($tag);
+        $entityManagerInterface->flush();
+
+        return $this->redirectToRoute("tags_list");
+    }
 }

@@ -72,4 +72,6 @@ class ArticleController extends AbstractController
 
         return $this->redirectToRoute("posts_list");
     }
+
+    // Exercice : créer une méthode update_tag qui va changer le nom du tag et faire de même pour category.
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,5 +43,24 @@ class CategoryController extends AbstractController
         $category = $categoryRepository->find($id);
 
         return $this->render("category_show.html.twig", ['category' => $category]);
+    }
+
+    /**
+     * @Route("update/category/{id}", name="update_category")
+     */
+    public function updateCategory(
+        $id,
+        CategoryRepository $categoryRepository,
+        EntityManagerInterface $entityManagerInterface
+    ) {
+        $category = $categoryRepository->find($id);
+
+        $category->setName("Nouveau Nom de la Category");
+
+        $entityManagerInterface->persist($category);
+
+        $entityManagerInterface->flush();
+
+        return $this->redirectToRoute("categories_list");
     }
 }
