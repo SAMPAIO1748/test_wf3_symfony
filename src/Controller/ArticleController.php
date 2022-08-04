@@ -92,4 +92,6 @@ class ArticleController extends AbstractController
 
         return $this->redirectToRoute("posts_list");
     }
+
+    // Exercice : créer des routes pour créer un nouveau tag et une nouvelle category.
 }

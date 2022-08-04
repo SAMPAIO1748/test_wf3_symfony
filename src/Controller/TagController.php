@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Tag;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,6 +56,23 @@ class TagController extends AbstractController
         $tag = $tagRepository->find($id);
 
         $tag->setName("Nouveau Nom du Tag");
+
+        $entityManagerInterface->persist($tag);
+        $entityManagerInterface->flush();
+
+        return $this->redirectToRoute("tags_list");
+    }
+
+    /**
+     * @Route("create/tag", name="create_tag")
+     */
+    public function createTag(EntityManagerInterface $entityManagerInterface)
+    {
+        $tag = new Tag();
+
+        $tag->setName("Nouveau Tag 2, la revange");
+        $tag->setDescription("Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa et similique itaque cum ullam id consectetur voluptatibus animi maiores repellat eius, architecto accusamus illum rem veniam reprehenderit tenetur earum quis.");
+        $tag->setColor("black");
 
         $entityManagerInterface->persist($tag);
         $entityManagerInterface->flush();

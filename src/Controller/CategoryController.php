@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -59,6 +60,22 @@ class CategoryController extends AbstractController
 
         $entityManagerInterface->persist($category);
 
+        $entityManagerInterface->flush();
+
+        return $this->redirectToRoute("categories_list");
+    }
+
+    /**
+     * @Route("create/category", name="create_category")
+     */
+    public function createCategory(EntityManagerInterface $entityManagerInterface)
+    {
+        $category = new Category();
+
+        $category->setName("Nouvelle catégorie");
+        $category->setDescription("Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus voluptate sed, sit dolores delectus est maiores vel fugiat enim perspiciatis, odio voluptas ab optio facilis adipisci repellendus, ex distinctio. Amet.");
+
+        $entityManagerInterface->persist($category);
         $entityManagerInterface->flush();
 
         return $this->redirectToRoute("categories_list");
