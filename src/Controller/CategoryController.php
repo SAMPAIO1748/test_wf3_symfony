@@ -119,4 +119,6 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute("categories_list");
     }
+
+    // Exercices : supprimer les routes du CategoryController pour les coder dans routes.yaml
 }

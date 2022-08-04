@@ -14,9 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends AbstractController
 {
-    /**
-     * @Route("/article", name="app_article")
-     */
     public function index(): Response
     {
         return $this->render('article/index.html.twig', [
@@ -24,9 +21,6 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("posts", name="posts_list")
-     */
     public function listPosts(ArticleRepository $articleRepository)
     {
         $articles = $articleRepository->findAll();
