@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -112,5 +113,23 @@ class ArticleController extends AbstractController
     }
 
     // Exercice : créer des routes pour créer un nouveau tag et une nouvelle category.
-    // Exercice : refaire les méthodes create_tag et create_category pour utiliser les formualires.
+    // Exercice : refaire les méthodes create_tag et create_category pour utiliser les formulaires.
+
+    /**
+     * @Route("delete/post/{id}", name="delete_post")
+     */
+    public function deletePost(
+        $id,
+        ArticleRepository $articleRepository,
+        EntityManagerInterface $entityManagerInterface
+    ) {
+        $article = $articleRepository->find($id);
+
+        $entityManagerInterface->remove($article);
+        $entityManagerInterface->flush();
+
+        return $this->redirectToRoute("posts_list");
+    }
+
+    // Exercice : créer les routes qui vont supprimer des tags et des categories.
 }
