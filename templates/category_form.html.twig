@@ -1,0 +1,27 @@
+{% extends "block.html.twig" %}
+
+{% block main %}
+
+	{# méthode la plus simple pour afficher le formulaire mais non personnalisable car tout est automatique : #}
+	{# form(categoryForm) #}
+
+	{# méthode plus longue mais qui permet une plus grande personnaisation #}
+
+	{{form_start(categoryForm)}}
+
+	{{form_label(categoryForm.name, 'Nom de la catégorie : ', {'label_attr' : {'class' : 'label'} } ) }}
+	{{form_widget(categoryForm.name, {'attr' : {'class' : 'input', 'placeholder' : 'Nom de la catégorie' } } ) }}
+
+	{{form_label(categoryForm.description, 'Description de la catégorie : ', {'label_attr' : {'class' : 'label'} } ) }}
+	{{form_widget(categoryForm.description, {'attr' : {'class' : 'input', 'placeholder' : 'Description de la catégorie' } } ) }}
+
+	{{form_widget(categoryForm.Enregistrer, {'attr' : {'class' : 'button'} } ) }}
+
+	{# méthode intermédiaire #}
+
+	{# form_row(categoryForm.name)
+		        form_row(categoryForm.description)
+		        form_row(categoryForm.Enregistrer)
+		     #}
+
+{{form_end(categoryForm)}}{% endblock %}

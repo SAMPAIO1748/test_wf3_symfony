@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -52,17 +54,29 @@ class CategoryController extends AbstractController
     public function updateCategory(
         $id,
         CategoryRepository $categoryRepository,
-        EntityManagerInterface $entityManagerInterface
+        EntityManagerInterface $entityManagerInterface,
+        Request $request
     ) {
         $category = $categoryRepository->find($id);
 
-        $category->setName("Nouveau Nom de la Category");
+        // on crée le formualire en spécifiant quel type de form on utilise
+        // et à quel objet on l'applique
+        $categoryForm = $this->createForm(CategoryType::class, $category);
 
-        $entityManagerInterface->persist($category);
+        // On spécifie à notre formualire qu'il récupère toutes les informations
+        // rentrées dans le formaulire et il doit les traiter.
+        $categoryForm->handleRequest($request);
 
-        $entityManagerInterface->flush();
+        if ($categoryForm->isSubmitted() && $categoryForm->isValid()) {
 
-        return $this->redirectToRoute("categories_list");
+            $entityManagerInterface->persist($category);
+            $entityManagerInterface->flush();
+
+            return $this->redirectToRoute("categories_list");
+        }
+
+
+        return $this->render("category_form.html.twig", ['categoryForm' => $categoryForm->createView()]);
     }
 
     /**
