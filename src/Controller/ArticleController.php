@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ArticleRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,4 +46,30 @@ class ArticleController extends AbstractController
     // càd name, description, et le title des articles pour 
     // category et name, description, color et le title des articles
     // pour tag
+
+    /**
+     * @Route("update/post/{id}", name="update_post")
+     */
+    public function update(
+        $id,
+        ArticleRepository $articleRepository,
+        EntityManagerInterface $entityManagerInterface
+    ) {
+        // J'ai sélectionné l'article que je souhaite modifié
+        $article = $articleRepository->find($id);
+
+        // Je modifie le titre de mon article sélectionné
+        // cet article est un objet PHP.
+        $article->setTitle("Nouveau titre");
+
+        // persist a pour mission de regarder l'origine de $article
+        // et en fonction de l'origine, il va appliquer soit 
+        // un update soit un create en SQL 
+        $entityManagerInterface->persist($article);
+
+        // flush va enregistrer le changement dans la bdd.
+        $entityManagerInterface->flush();
+
+        return $this->redirectToRoute("posts_list");
+    }
 }
