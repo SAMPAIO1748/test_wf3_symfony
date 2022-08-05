@@ -5,3 +5,27 @@ posts_list: # nom de la route
 app_article:
   path: /article
   controller: App\Controller\ArticleController::index
+
+app_category:
+  path: /category
+  controller: App\Controller\CategoryController::index
+
+categories_list:
+  path: /categories
+  controller: App\Controller\CategoryController::listCategories
+
+category_show:
+  path: /category/{id}
+  controller: App\Controller\CategoryController::showCategory
+
+update_category:
+  path: /update/category/{id}
+  controller: App\Controller\CategoryController::updateCategory
+
+create_category:
+  path: /create/category
+  controller: App\Controller\CategoryController::createCategory
+
+delete_category:
+  path: /delete/category/{id}
+  controller: App\Controller\CategoryController::deleteCategory
