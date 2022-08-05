@@ -126,4 +126,18 @@ class ArticleController extends AbstractController
     }
 
     // Exercice : créer les routes qui vont supprimer des tags et des categories.
+
+
+    /**
+     * TP : créer un nouveau projet Symfony: library
+     * Ce projet aura une base de données qu'il faudra créer.
+     * Il aura 3 entités :
+     *  - book (title, string, 255, non nullable), (resume, text, non nullable), (year, integer, non nullable)
+     *  - genre (name, string, 255, non nullable), (description, text, non nullable)
+     *  - writer (name, string, 255, non nullable), (bio, text, non nullable)
+     * La table book sera relié à genre et writer. Un book aura un genre et un writer mais un writer et un genre
+     * peuvent avoir plusieyrs books. (book aura les clés étrangères).
+     * Il faudra faire le CRUD pour chaque entité.
+     * Créer des pages fonctionnelles avec du css pour rendre cela facile à utiliser
+     */
 }
