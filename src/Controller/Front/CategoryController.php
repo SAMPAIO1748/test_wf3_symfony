@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/categories/", name="front_list_category")
+     * @Route("/categories/", name="front_category_list")
      */
     //////////////////////////////////// autowire
     public function listCategories(CategoryRepository $categoryRepository)
@@ -29,7 +29,7 @@ class CategoryController extends AbstractController
     // et une méthode qui va afficher les articles (titre, contenu)
 
     /**
-     * @Route("/category/{id}", name="front_show_category")
+     * @Route("/category/{id}", name="front_category_show")
      */
     public function showCategory($id, CategoryRepository $categoryRepository)
     {

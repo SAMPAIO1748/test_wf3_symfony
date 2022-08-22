@@ -14,7 +14,7 @@
 
 		{% for article in articles %}
 			<div class="article">
-				<a href="{{ path('article_show', {'id' : article.id}) }}">
+				<a href="{{ path('front_article_show', {'id' : article.id}) }}">
 					<h2>{{ article.titre }}</h2>
 				</a>
 			</div>
@@ -34,5 +34,5 @@
 							 #}
 
 	{# mettre du css dans ce fichier pour que cela ressemble à la page d'exemple 
-										les titres des articles devront être de la couleur de "La Saga du Clone" #}
+											les titres des articles devront être de la couleur de "La Saga du Clone" #}
 {% endblock %}

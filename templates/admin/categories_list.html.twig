@@ -4,12 +4,12 @@
 {% block main %}
 
 	{#<pre>
-							    {{ dump(categories) }}
-							</pre>#}
+								    {{ dump(categories) }}
+								</pre>#}
 
 	{% for category in categories %}
 		<h2>
-			<a href="{{ path('category_show', {'id' : category.id} ) }}">
+			<a href="{{ path('admin_category_show', {'id' : category.id} ) }}">
 				{{ category.name }}
 			</a>
 		</h2>
