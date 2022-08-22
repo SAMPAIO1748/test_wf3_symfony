@@ -48,4 +48,6 @@ class UserController extends AbstractController
 
         return $this->render('front/user_add.html.twig', ['userForm' => $userForm->createView()]);
     }
+
+    // Exercice : créer un méthode qui va permettre à l'utilisateur connecté de modifié son compte.
 }
