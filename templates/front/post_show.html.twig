@@ -1,0 +1,16 @@
+{% extends "block.html.twig" %}
+
+{% block main %}
+
+	<h1>{{ article.title }}</h1>
+	<p>{{ article.content }}</p>
+
+	{% if article.category %}
+		<h2>Catégorie :
+			{{ article.category.name }}</h2>
+	{% endif %}
+	{% if  article.tag %}
+		<h2>Tag :
+			{{ article.tag.name }}</h2>
+	{% endif %}
+{% endblock %}

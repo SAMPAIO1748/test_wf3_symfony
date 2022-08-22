@@ -1,0 +1,14 @@
+{% extends "block.html.twig" %}
+
+{% block css %}
+
+	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+{% endblock %}
+
+{% block main %}
+
+	<h1>{{ article.titre }}</h1>
+	<p>{{ article.contenu }}</p>
+
+{% endblock %}

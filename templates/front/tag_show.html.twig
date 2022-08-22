@@ -1,0 +1,15 @@
+{% extends "block.html.twig" %}
+
+{% block main %}
+
+	<h1>{{ tag.name }}</h1>
+	<h2>{{ tag.color }}</h2>
+	<p>{{ tag.description }}</p>
+
+	{% for article in tag.articles %}
+
+		<h3>{{ article.title }}</h3>
+
+	{% endfor %}
+
+{% endblock %}
