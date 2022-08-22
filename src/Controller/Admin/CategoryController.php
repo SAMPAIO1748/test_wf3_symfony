@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
@@ -26,7 +26,7 @@ class CategoryController extends AbstractController
         // la méthode findAll récupère toutes les catégories enregistrées dans la base de données.
         $categories = $categoryRepository->findAll();
 
-        return $this->render("categories_list.html.twig", ['categories' => $categories]);
+        return $this->render("admin/categories_list.html.twig", ['categories' => $categories]);
     }
 
     // Exercice : faire une méthode qui affiche les tags (nom, description) 
@@ -37,7 +37,7 @@ class CategoryController extends AbstractController
         // la méthode find permet de récupérer une catégorie en fonction de son id.
         $category = $categoryRepository->find($id);
 
-        return $this->render("category_show.html.twig", ['category' => $category]);
+        return $this->render("admin/category_show.html.twig", ['category' => $category]);
     }
 
     public function updateCategory(
@@ -61,11 +61,11 @@ class CategoryController extends AbstractController
             $entityManagerInterface->persist($category);
             $entityManagerInterface->flush();
 
-            return $this->redirectToRoute("categories_list");
+            return $this->redirectToRoute("admin_categories_list");
         }
 
 
-        return $this->render("category_form.html.twig", ['categoryForm' => $categoryForm->createView()]);
+        return $this->render("admin/category_form.html.twig", ['categoryForm' => $categoryForm->createView()]);
     }
 
     public function createCategory(EntityManagerInterface $entityManagerInterface, Request $request)
@@ -83,10 +83,10 @@ class CategoryController extends AbstractController
             $entityManagerInterface->persist($category);
             $entityManagerInterface->flush();
 
-            return $this->redirectToRoute("categories_list");
+            return $this->redirectToRoute("admin_categories_list");
         }
 
-        return $this->render('category_form.html.twig', ['categoryForm' => $categoryForm->createView()]);
+        return $this->render('admin/category_form.html.twig', ['categoryForm' => $categoryForm->createView()]);
     }
 
     public function deleteCategory(
@@ -100,7 +100,7 @@ class CategoryController extends AbstractController
 
         $entityManagerInterface->flush();
 
-        return $this->redirectToRoute("categories_list");
+        return $this->redirectToRoute("admin_categories_list");
     }
 
     // Exercices : supprimer les routes du CategoryController pour les coder dans routes.yaml

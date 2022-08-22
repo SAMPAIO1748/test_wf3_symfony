@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Tag;
 use App\Form\TagType;
@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TagController extends AbstractController
 {
     /**
-     * @Route("/tag", name="app_tag")
+     * @Route("admin/tag", name="admin_app_tag")
      */
     public function index(): Response
     {
@@ -24,23 +24,23 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("tags", name="tags_list")
+     * @Route("admin/tags", name="admin_tags_list")
      */
     public function listTags(TagRepository $tagRepository)
     {
         $tags = $tagRepository->findAll();
 
-        return $this->render("tags_list.html.twig", ['tags' => $tags]);
+        return $this->render("admin/tags_list.html.twig", ['tags' => $tags]);
     }
 
     /**
-     * @Route("tag/{id}", name="tag_show")
+     * @Route("admin/tag/{id}", name="admin_tag_show")
      */
     public function showTag($id, TagRepository $tagRepository)
     {
         $tag = $tagRepository->find($id);
 
-        return $this->render("tag_show.html.twig", ['tag' => $tag]);
+        return $this->render("admin/tag_show.html.twig", ['tag' => $tag]);
     }
 
     // Exercice : dans les pages vues de tags_list, categories_list et posts_list: 
@@ -48,7 +48,7 @@ class TagController extends AbstractController
     // lorsque l'on clique sur le name ou le title
 
     /**
-     * @Route("update/tag/{id}", name="udate_tag")
+     * @Route("admin/update/tag/{id}", name="admin_udate_tag")
      */
     public function updateTag(
         $id,
@@ -69,14 +69,14 @@ class TagController extends AbstractController
             $entityManagerInterface->persist($tag);
             $entityManagerInterface->flush();
 
-            return $this->redirectToRoute("tags_list");
+            return $this->redirectToRoute("admin_tags_list");
         }
 
-        return $this->render("tag_form.html.twig", ['tagForm' => $tagForm->createView()]);
+        return $this->render("admin/tag_form.html.twig", ['tagForm' => $tagForm->createView()]);
     }
 
     /**
-     * @Route("create/tag", name="create_tag")
+     * @Route("admin/create/tag", name="admin_create_tag")
      */
     public function createTag(EntityManagerInterface $entityManagerInterface, Request $request)
     {
@@ -94,14 +94,14 @@ class TagController extends AbstractController
             $entityManagerInterface->persist($tag);
             $entityManagerInterface->flush();
 
-            return $this->redirectToRoute("tags_list");
+            return $this->redirectToRoute("admin_tags_list");
         }
 
-        return $this->render("tag_form.html.twig", ['tagForm' => $tagForm->createView()]);
+        return $this->render("admin/tag_form.html.twig", ['tagForm' => $tagForm->createView()]);
     }
 
     /**
-     * @Route("delete/tag/{id}", name="delete_tag")
+     * @Route("admin/delete/tag/{id}", name="admin_delete_tag")
      */
     public function deleteTag(
         $id,
@@ -114,6 +114,6 @@ class TagController extends AbstractController
         $entityManagerInterface->remove($tag);
         $entityManagerInterface->flush();
 
-        return $this->redirectToRoute("tags_list");
+        return $this->redirectToRoute("admin_tags_list");
     }
 }

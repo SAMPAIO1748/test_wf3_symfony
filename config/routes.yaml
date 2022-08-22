@@ -1,31 +1,31 @@
-posts_list: # nom de la route
-  path: /posts # chemin dans l'URL de la route
-  controller: App\Controller\ArticleController::listPosts # fonction avec le chemein du controller qui est associée à cette route
+admin_posts_list: # nom de la route
+  path: /admin/posts # chemin dans l'URL de la route
+  controller: App\Controller\Admin\ArticleController::listPosts # fonction avec le chemein du controller qui est associée à cette route
 
-app_article:
-  path: /article
-  controller: App\Controller\ArticleController::index
+admin_app_article:
+  path: /admin/article
+  controller: App\Controller\Admin\ArticleController::index
 
-app_category:
-  path: /category
-  controller: App\Controller\CategoryController::index
+admin_app_category:
+  path: /admin/category
+  controller: App\Controller\Admin\CategoryController::index
 
-categories_list:
-  path: /categories
-  controller: App\Controller\CategoryController::listCategories
+admin_categories_list:
+  path: /admin/categories
+  controller: App\Controller\Admin\CategoryController::listCategories
 
-category_show:
-  path: /category/{id}
-  controller: App\Controller\CategoryController::showCategory
+admin_category_show:
+  path: /admin/category/{id}
+  controller: App\Controller\Admin\CategoryController::showCategory
 
-update_category:
-  path: /update/category/{id}
-  controller: App\Controller\CategoryController::updateCategory
+admin_update_category:
+  path: /admin/update/category/{id}
+  controller: App\Controller\Admin\CategoryController::updateCategory
 
-create_category:
-  path: /create/category
-  controller: App\Controller\CategoryController::createCategory
+admin_create_category:
+  path: /admin/create/category
+  controller: App\Controller\Admin\CategoryController::createCategory
 
-delete_category:
-  path: /delete/category/{id}
-  controller: App\Controller\CategoryController::deleteCategory
+admin_delete_category:
+  path: /admin/delete/category/{id}
+  controller: App\Controller\Admin\CategoryController::deleteCategory

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
@@ -25,17 +25,17 @@ class ArticleController extends AbstractController
     {
         $articles = $articleRepository->findAll();
 
-        return $this->render("posts_list.html.twig", ['articles' => $articles]);
+        return $this->render("admin/posts_list.html.twig", ['articles' => $articles]);
     }
 
     /**
-     * @Route("post/{id}", name="post_show")
+     * @Route("/admin/post/{id}", name="admin_post_show")
      */
     public function showPost($id, ArticleRepository $articleRepository)
     {
         $article = $articleRepository->find($id);
 
-        return $this->render("post_show.html.twig", ['article' => $article]);
+        return $this->render("admin/post_show.html.twig", ['article' => $article]);
     }
 
     // Exercice :  céer les routes qui vont afficher une catégorie
@@ -46,7 +46,7 @@ class ArticleController extends AbstractController
     // pour tag
 
     /**
-     * @Route("update/post/{id}", name="update_post")
+     * @Route("/admin/update/post/{id}", name="admin_update_post")
      */
     public function update(
         $id,
@@ -73,16 +73,16 @@ class ArticleController extends AbstractController
             // flush va enregistrer le changement dans la bdd.
             $entityManagerInterface->flush();
 
-            return $this->redirectToRoute("posts_list");
+            return $this->redirectToRoute("admin_posts_list");
         }
 
-        return $this->render("article_form.html.twig", ['articleForm' => $articleForm->createView()]);
+        return $this->render("admin/article_form.html.twig", ['articleForm' => $articleForm->createView()]);
     }
 
     // Exercice : créer une méthode update_tag qui va changer le nom du tag et faire de même pour category
 
     /**
-     * @Route("create/post", name="create_post")
+     * @Route("/admin/create/post", name="admin_create_post")
      */
     public function createPost(EntityManagerInterface $entityManagerInterface, Request $request)
     {
@@ -100,17 +100,17 @@ class ArticleController extends AbstractController
             $entityManagerInterface->persist($article);
             $entityManagerInterface->flush();
 
-            return $this->redirectToRoute("posts_list");
+            return $this->redirectToRoute("admin_posts_list");
         }
 
-        return $this->render("article_form.html.twig", ['articleForm' => $articleForm->createView()]);
+        return $this->render("admin/article_form.html.twig", ['articleForm' => $articleForm->createView()]);
     }
 
     // Exercice : créer des routes pour créer un nouveau tag et une nouvelle category.
     // Exercice : refaire les méthodes create_tag et create_category pour utiliser les formulaires.
 
     /**
-     * @Route("delete/post/{id}", name="delete_post")
+     * @Route("/admin/delete/post/{id}", name="admin_delete_post")
      */
     public function deletePost(
         $id,
@@ -122,7 +122,7 @@ class ArticleController extends AbstractController
         $entityManagerInterface->remove($article);
         $entityManagerInterface->flush();
 
-        return $this->redirectToRoute("posts_list");
+        return $this->redirectToRoute("admin_posts_list");
     }
 
     // Exercice : créer les routes qui vont supprimer des tags et des categories.
