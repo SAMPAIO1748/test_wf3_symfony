@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
@@ -44,6 +46,16 @@ class Article
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $tag;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Media::class, mappedBy="article")
+     */
+    private $medias;
+
+    public function __construct()
+    {
+        $this->medias = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -94,6 +106,36 @@ class Article
     public function setTag(?Tag $tag): self
     {
         $this->tag = $tag;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getMedias(): Collection
+    {
+        return $this->medias;
+    }
+
+    public function addMedia(Media $media): self
+    {
+        if (!$this->medias->contains($media)) {
+            $this->medias[] = $media;
+            $media->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedia(Media $media): self
+    {
+        if ($this->medias->removeElement($media)) {
+            // set the owning side to null (unless already changed)
+            if ($media->getArticle() === $this) {
+                $media->setArticle(null);
+            }
+        }
 
         return $this;
     }
