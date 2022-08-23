@@ -3,8 +3,14 @@
 namespace App\Controller\Front;
 
 use App\Repository\ArticleRepository;
+use Container55pacsH\getZenstruckMailerTest_MailerService;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
@@ -33,4 +39,54 @@ class HomeController extends AbstractController
     {
         return $this->render("front/contact.html.twig");
     }
+
+    /**
+     * @Route("email/", name="email")
+     */
+    public function email(
+        MailerInterface $mailerInterface,
+        Request $request
+    ) {
+
+        $message = $request->request->get('message');
+
+        // création de l'email
+        $email = (new Email())
+            ->from("test@test.com") // adresse d'envoie
+            ->to("toto@email.com") // adresse de réception
+            ->subject("message") // sujet du mail
+            ->html("<p>Bonjour</p>"); // contenu html du mail
+
+        // envoie du mail
+        $mailerInterface->send($email);
+
+        return $this->redirectToRoute("front_post_list");
+    }
+
+    /**
+     * @Route("email/bis", name="email_bis")
+     */
+    public function emailBis(MailerInterface $mailerInterface)
+    {
+
+        $toto = "TOTO";
+
+        $email = (new TemplatedEmail())
+            ->from("test@test.com")
+            ->to("user@mail.com")
+            ->subject('sujet')
+            ->htmlTemplate('front/email.html.twig')
+            ->context(
+                [
+                    'toto' => $toto
+                ]
+            );
+
+        $mailerInterface->send($email);
+
+        return $this->redirectToRoute("front_post_list");
+    }
+
+    // Exercice : dans UserController dans la méthode userInsert après l'enregistrement du nouveau user
+    // envoyer un mail au nouvel inscrit.
 }

@@ -293,5 +293,8 @@
     },
     "twig/extra-bundle": {
         "version": "v3.4.0"
+    },
+    "zenstruck/mailer-test": {
+        "version": "v1.1.0"
     }
 }
