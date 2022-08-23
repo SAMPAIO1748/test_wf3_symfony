@@ -1,0 +1,8 @@
+{% extends "block.html.twig" %}
+
+{% block main %}
+
+	<h1>{{ media.title }}</h1>
+	<img src="{{ asset('medias/' ~ media.src) }}" alt="{{ media.alt }}">
+
+{% endblock %}

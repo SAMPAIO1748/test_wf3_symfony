@@ -4,8 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Media;
 use App\Form\MediaType;
+use App\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use PDO;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use SYmfony\Component\Routing\Annotation\Route;
@@ -66,5 +66,27 @@ class MediaController extends AbstractController
         }
 
         return $this->render("admin/media_form.html.twig", ['mediaForm' => $mediaForm->createView()]);
+    }
+
+    // Exercice : Faire le CRUD complet sur MediaController
+
+    /**
+     * @Route("admin/medias", name="admin_list_media")
+     */
+    public function adminListMedia(MediaRepository $mediaRepository)
+    {
+        $medias = $mediaRepository->findAll();
+
+        return $this->render("admin/media_list.html.twig", ['medias' => $medias]);
+    }
+
+    /**
+     * @Route("admin/media/{id}", name="admin_show_media")
+     */
+    public function adminShowMedia($id, MediaRepository $mediaRepository)
+    {
+        $media = $mediaRepository->find($id);
+
+        return $this->render("admin/media_show.html.twig", ['media' => $media]);
     }
 }
