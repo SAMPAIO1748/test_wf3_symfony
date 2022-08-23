@@ -25,4 +25,12 @@ class HomeController extends AbstractController
 
         return $this->render('front/search.html.twig', ['articles' => $articles, 'term' => $term]);
     }
+
+    /**
+     * @Route("contact", name="contact")
+     */
+    public function contact()
+    {
+        return $this->render("front/contact.html.twig");
+    }
 }
