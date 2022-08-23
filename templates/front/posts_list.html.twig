@@ -2,10 +2,10 @@
 
 {% block main %}
 
-	{% for article in articles %}
+	{% for article in articles | slice(0,3) %}
 		<h2>
 			<a href="{{ path('front_post_show', {'id' : article.id} ) }}">
-				{{ article.title }}</a>
+				{{ article.title | upper }}</a>
 		</h2>
 		<p>{{ article.content }}</p>
 	{% endfor %}
