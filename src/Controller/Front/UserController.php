@@ -8,6 +8,8 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,7 +21,8 @@ class UserController extends AbstractController
     public function userInsert(
         EntityManagerInterface $entityManagerInterface,
         Request $request,
-        UserPasswordHasherInterface $userPasswordHasherInterface
+        UserPasswordHasherInterface $userPasswordHasherInterface,
+        MailerInterface $mailerInterface
     ) {
 
         $user = new User();
@@ -42,6 +45,20 @@ class UserController extends AbstractController
 
             $entityManagerInterface->persist($user);
             $entityManagerInterface->flush();
+
+            // Récupération du mail donné dans le formulaire
+
+            $email_user = $userForm->get('email')->getData();
+
+            // création du mail
+            $email = (new Email())
+                ->from('test@test.com')
+                ->to($email_user)
+                ->subject('inscription')
+                ->html('<h1>Bienvenue chez nous ! </h1>');
+
+            // envoie du mail
+            $mailerInterface->send($email);
 
             return $this->redirectToRoute('app_login');
         }
